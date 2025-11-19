@@ -11,11 +11,23 @@
 
 import rich
 import time
+import curses
 
-from core import start_menu as menu
+from core import menu, start, about, load
 
 def main():
-    menu.start()
-    
+    namee = ""
+    while True:
+        choice, name = menu.main(namee) # tuple unpacking returns list of [choice, name]
+        namee = name
+
+        if choice == 0:
+            start.start_game(namee)
+        elif choice == 1:
+            load()
+        elif choice == 2:
+            about.about()
+        elif choice == 3:
+            exit()
 
 main()
