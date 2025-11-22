@@ -2,14 +2,13 @@
 # G-5L
 # Final Project
 
-# To install the needed libraries, run: pip install -r requirements.txt
-# Do source venv/bin/activate before executing the program in terminal
+# To install the needed libraries: pip install -r requirements.txt
+# Before executing the program in terminal: source venv/bin/activate
 
 # References
 # https://docs.python.org/3/howto/curses.html
-# https://jakob-bagterp.github.io/colorist-for-python/ansi-escape-codes/introduction/
 
-import rich
+
 import time
 import curses
 

@@ -1,139 +1,45 @@
 import time
 import os
 import platform
+from colorama import init, Fore, Back, Style
+from core import ascii
+from core import game
 
-scn1 = """
-  ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                        *           +                  ___+                        ||                                       
-                                                    ___|+__   _____|                /! # !                   ______||_____                                   
-                                                    | ''''' |\|     |\              !;! # !   ----------      \= = = = = =                                   
-                                            __________''''' | \  /|\|,\             !;! # !_/|"'"'"'"'"'|      \-_-_-_-_-_/                                  
-                                            ..........|\''' |-.\/ !:\,,\            !;! /|%/"|"'"'"'"'"'|         \|  |/                                     
-                                            ..........| \'' |-..\ |":|,|            !;!|%||""|"'"'"'"'"'|          |o |                                      
-                                            ..........|O \' |-.._|!:"!,|            !;!|%||""|"'"'"'"'"'|          |  |                                      
-                                            ..........|\O \ |-.._||":|,/            \;!|%/|""|"'"'"'"'"'!________  | o|                                      
-                                            ..........|O\O| |-.._|!:"|/              \!||.|""|"'"/|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|_|-.._||" /                \||.|""|"'/:|: !! :: !! :: | |o |                                      
-                                            ..........|O\O|.\-.._|!:/        0         \|.|""|"/::|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|:.\.._||/        /|\         \ |""|/:::|: !! :: !! :: | | o|                                      
-                                            ..........|O\O|.:.| //          / \          \|""|::::|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|:.:|//                         \\"|::::|: !! :: !! :: |_________                                  
-                                            ..........|O\O|.://  ///  ///  ///  ///  ///  /\\|::::|: !! :: !! :: |O O O O O                                  
-                                            ..........|\O\| //  ///  ///  ///  ///  ///  ///\\::::|: !! :: !! :: | o o o o                                   
-                                            ..........|O:O|//  ///  ///  ///  ///  ///  ///  \\:::|: !! :: !! :: |O O O O O                                  
-                                            ..........|: //   ///  ///  ///  ///  ///  ///    \\::|: !! :: !! :: | o o o o                                   
-                                            ..........| //                                     \\:|: !! :: !! :: |O O O O O                                  
-                                            __________|//                                       \\|______________|_o_o_o_o_                                  
-                                            ============                                         \=========================                                  
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-  ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-"""
+init(autoreset=True)
 
-scn2 = """
-  ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                        *           +                  ___+                        ||                                       
-                                                    ___|+__   _____|                /! # !                   ______||_____                                   
-                                                    | ''''' |\|     |\              !;! # !   ----------      \= = = = = =                                   
-                                            __________''''' | \  /|\|,\             !;! # !_/|"'"'"'"'"'|      \-_-_-_-_-_/                                  
-                                            ..........|\''' |-.\/ !:\,,\            !;! /|%/"|"'"'"'"'"'|         \|  |/                                     
-                                            ..........| \'' |-..\ |":|,|            !;!|%||""|"'"'"'"'"'|          |o |                                      
-                                            ..........|O \' |-.._|!:"!,|            !;!|%||""|"'"'"'"'"'|          |  |                                      
-                                            ..........|\O \ |-.._||":|,/            \;!|%/|""|"'"'"'"'"'!________  | o|                                      
-                                            ..........|O\O| |-.._|!:"|/              \!||.|""|"'"/|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|_|-.._||" /                \||.|""|"'/:|: !! :: !! :: | |o |                                      
-                                            ..........|O\O|.\-.._|!:/        0         \|.|""|"/::|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|:.\.._||/        /|\         \ |""|/:::|: !! :: !! :: | | o|                                      
-                                            ..........|O\O|.:.| //          / \          \|""|::::|: !! :: !! :: | |  |                                      
-                                            ..........|\O\|:.:|//                         \\"|::::|: !! :: !! :: |_________                                  
-                                            ..........|O\O|.://  /// 0///  / 0  ///  ///  /\\|::::|: !! :: !! :: |O O O O O                                  
-                                            ..........|\O\| //  ///  \    // \ ///  ///  ///\\::::|: !! :: !! :: | o o o o                                   
-                                            ..........|O:O|//  ///   |   /// |///  ///  ///  \\:::|: !! :: !! :: |O O O O O                                  
-                                            ..........|: //   ///   / \ /// / \/  ///  ///    \\::|: !! :: !! :: | o o o o                                   
-                                            ..........| //                                     \\:|: !! :: !! :: |O O O O O                                  
-                                            __________|//                                       \\|______________|_o_o_o_o_                                  
-                                            ============                                         \=========================                                  
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-                                                                                                                                                             
-  ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-"""
+# helper functions
 
-def act1_intro(name):
-    os.system("cls" if platform.system() == "Windows" else "clear")
-    animateText("You start to feel that something isn’t right. Everything feels… wrong.", 0.03)
-    time.sleep(1)
-
-    animateText("A mysterious figure approaches you from across the street. He doesn’t move like the others. His clothes look patched, scavenged, unlike the sleek urban fashion around you.", 0.03)
-    time.sleep(1)
-
-    animateText('Trovius: "You feel it, don’t you? The cracks in this world… the things that don’t make sense."', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "Uhm, what… what is this? Who are you?"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius: "I’m Trovius… your friend, if you’ll allow me. You may not understand now, but you will. Follow me… if you want answers."', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "How do you even know my name? Get away from me, stranger!"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius (chuckles): "You’ll see soon enough. Time isn’t on our side."', 0.03)
-    time.sleep(1)
-
-def act2_chase():
-    os.system("cls" if platform.system() == "Windows" else "clear")
-    animateText("As you venture with Trovius, a street vendor approaches you.", 0.03)
-    time.sleep(0.5)
-    animateText('Street Vendor: "Hello! Are you interested in buying my cookies? Hello! Are you interested in buying my k31js/’]d(gibberish)?"', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "What… what is wrong with these people?"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius: "They’re not people. They’re placeholders."', 0.03)
-    time.sleep(0.5)
-    animateText("Trovius gestures for you to look up.", 0.03)
-    animateText("A bird hangs in the sky—frozen mid-flight, like a paused frame in a broken animation.", 0.03)
-    time.sleep(0.5)
-    animateText('MC: "This isn’t real… is it?"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius: "Real enough to fool you. Until now."', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius (whispers, afraid yet determined): "Listen carefully. ARGUS controls every part of this simulation… except one."', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "Except… what?"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius: "There’s a region where its surveillance weakens. A dead zone. A place it cannot fully predict."', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "And you’re taking me there?"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius: "It’s the only path to reach ARGUS’ Root Core. The only path to the truth."', 0.03)
-    time.sleep(0.5)
-    animateText('ARGUS: "Unauthorized thought pattern detected. Subject 08, cease deviation immediately."', 0.03)
-    time.sleep(0.5)
-    animateText('MC: "It knows where we are…"', 0.03)
-    time.sleep(0.5)
-    animateText('Trovius (taps wall): "…here it knows just a little less. Brace yourself… they’re coming."', 0.03)
-    time.sleep(1)
-
-
-
-def animateText(text, delay=0.04):
-    offset_x = " " * 3
-    text = offset_x + text
+def animateText(text, color=Fore.WHITE, delay=0.005):
     for char in text:
-        print(char, end="", flush=True)
+        print(color + char, end="", flush=True)
         time.sleep(delay)
     print()  # moves cursor to next line
 
-def start_game(name):
+def printLine(dialogue, line):
+    if dialogue[line][0] == "n":
+            animateText(dialogue[line][1], Fore.GREEN)
+    elif dialogue[line][0] == "t":
+        animateText(dialogue[line][1], Style.BRIGHT)
+    elif dialogue[line][0] == "a":
+        animateText(dialogue[line][1], Fore.BLUE + Style.BRIGHT)
+
+def userReply(dialogue, line, name):
+    while True:
+        for optns in dialogue[line][2]:
+            print(optns)
+        choice = input(name + ": ")
+        if choice == "1":
+            line = dialogue[line][3][choice]
+            return line
+        elif choice == "2":
+            line = dialogue[line][3][choice]
+            return line
+        else:
+            print("Invalid input. Try again.\n")
+
+# scenes
+
+def loading(name):
     os.system("cls" if platform.system() == "Windows" else "clear") 
 
     animateText("Cognitive pattern detected...", delay=0.02)
@@ -143,16 +49,91 @@ def start_game(name):
         print("   [" + "=" * i * 5 + "] " + str(i/10 * 100) + "%")
         time.sleep(0.03)
     time.sleep(3)
-    os.system("cls" if platform.system() == "Windows" else "clear") 
 
-    print(scn1)
-    print()
-    animateText("You stand in the heart of Year 3067’s chrome-lit metropolis.")
-    time.sleep(1)
-    os.system("cls" if platform.system() == "Windows" else "clear") 
-    print(scn2)
-    animateText("You look around to find yourself in a dystopian-like city with holographic billboards, drones humming, and pedestrians with seemingly strange steps.")
+def act1(name):
+    os.system("cls" if platform.system() == "Windows" else "clear")
+    print("ACT 1: THE AWAKENING PROTOCOL")
+    time.sleep(3)
+    os.system("cls" if platform.system() == "Windows" else "clear")
 
-    act1_intro(name)
-    act2_chase()
-    input()
+    dialogue = [["n", "You stand in the heart of Year 3067's chrome-lit metropolis. You look around and find yourself in a dystopian-like city with  drones humming overhead, and pedestrians walking with strangely synchronized steps."],
+                ["n", "You started to feel that something isn't right. Everything feels… wrong."],
+                ["n", "A mysterious figure approaches you from across the street."],
+                ["n", "He doesn't move like the others. His clothes look patched, scavenged, unlike the sleek urban fashion around you."],
+                ["t", "Trovius: You feel it, don't you? The cracks in this world… the things that don't make sense.", ["[1] Uhm, what… what is this?", "[2] Who are you?"], {"1":5, "2":6}],
+                ["t", "Trovius: You may not understand now, but you will. Follow me… if you want answers."], # 5
+                ["t", "Trovius: I'm Trovius… your friend, if you'll allow me. You may not understand now, but you will."]] # 6
+    
+    line = 0
+    while line < len(dialogue):
+        # print lines
+        if line == 0:
+            print(ascii.scn1)
+        
+        printLine(dialogue, line)
+
+        # skip the another choice
+        dialogueArr = [4]
+        nextDialogueArr = [i + 1 for i in dialogueArr]
+
+        if line in nextDialogueArr:
+            line += 1
+
+        # dialogues
+        if line in dialogueArr:
+            line = userReply(dialogue, line, name)
+        else:
+            print(Fore.RED + Style.DIM + "(Press enter to continue)")
+            line += 1
+            input()
+
+def act2(name):
+    os.system("cls" if platform.system() == "Windows" else "clear")
+    print("ACT 2: CHASE THE GLITCH")
+    time.sleep(3)
+    os.system("cls" if platform.system() == "Windows" else "clear")
+
+    dialogue = [["n", "As you venture with Trovius, a street vendor approaches you."],
+                ["t", "Street Vendor: Hello! Are you interested in buying my cookies? Hello! Are you interested in buying my k31js/'d(gibberish)?", ["[1] Hell no!", "[2] What… what is wrong with these people?"], {"1":2, "2":3}],
+                ["t", "Trovius: Language boy! Well, I mean they're not real anyways."],
+                ["t", "Trovius: Yeah, well... they're not real people."],
+                ["n", "Trovius gestures for you to look up."],
+                ["n", "A bird hangs in the sky—frozen mid-flight, like a paused frame in a broken animation.", ["[1] Why is that bird floating? Am I going crazy?!", "[2] This isn't real, is it?"], {"1":6, "2":7}],
+                ["t", "You're not crazy " + name + " but you're about to. So, keep attention to everything I will say."],
+                ["t", "Real enought to fool you " + name + ". So, keep attention to everything I will say."],
+                ["t", "Trovius: Listen carefully. ARGUS controls every part of this simulation… except one."],
+                ["t", """Trovius:
+ There's a region where its surveillance weakens. A dead zone.
+ A place it cannot fully predict.
+""", ["[1] And you're taking me there?" "[2] Let's get this done!"], {"1":10, "2":11}],
+["t", "Yes, don't be scared now."],
+["t", "That's the spirit " + name + "!"],
+["t", """Trovius: It's the only path to reach ARGUS' Root Core. 
+       The only path to the truth."""],
+       ["a", "ARGUS: Unauthorized thought pattern detected. Subject 08, cease deviation immediately."],
+       ["t", "Trovius (whispers, afraid yet determined): It always knows. But here? He just taps the wall…here it knows just a little less.”"],
+       ["t", "Brace yourself… they're coming. Remember this… these aren't soldiers… they are real, they are just algorithms. And their only goal… is to repair you. Permanently."]]
+
+    line = 0
+    while line < len(dialogue):
+        # print lines
+        printLine(dialogue, line)
+
+        dialogueArr = [1, 5, 9]
+        nextDialogueArr = [i + 1 for i in dialogueArr] # dialogue next to current dialogue line
+        if line in nextDialogueArr:
+            line += 1
+
+        # dialogues
+        if line in dialogueArr:
+            line = userReply(dialogue, line, name)
+        else:
+            print(Fore.RED + Style.DIM + "(Press enter to continue)")
+            line += 1
+            input()
+
+def start_game(name):
+    loading(name)
+    act1(name)
+    act2(name)
+    game.game(name)
