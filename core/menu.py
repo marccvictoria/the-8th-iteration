@@ -11,8 +11,6 @@ def main(namee):
         curses.init_pair(2, curses.COLOR_CYAN, -1)   # Cyan text
         curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_GREEN)  # highlight
 
-        stdscr.clear()
-
         title = """                                                                 
                                                                             
                      ███████╗██╗  ██╗ ██████╗     █████╗ ██ █████╗██╗  ██╗        
@@ -54,18 +52,33 @@ def main(namee):
 
         # get name
         if namee == "":
-            stdscr.addstr(30, 15, ">" * 130, curses.color_pair(1))
-            stdscr.addstr(32, 15, "<" * 130, curses.color_pair(1))
-            stdscr.addstr(31, 50, ">>>>> Identify yourself (Nickname): ", curses.color_pair(2)) # 36 char
-            stdscr.refresh()
-            curses.echo() # for input
-            name = stdscr.getstr(31, 86).decode("utf-8")
+            while True:
+                # display the prompt box
+                stdscr.addstr(30, 15, ">" * 130, curses.color_pair(1))
+                stdscr.addstr(32, 15, "<" * 130, curses.color_pair(1))
+                stdscr.addstr(31, 50, ">>>>> Identify yourself (Nickname): ", curses.color_pair(2))
+                stdscr.refresh()
 
-            # clear after
-            stdscr.addstr(30, 0, " " * 150)
-            stdscr.addstr(31, 0, " " * 150)
-            stdscr.addstr(32, 0, " " * 150)
-            stdscr.refresh()
+                curses.echo()
+                name = stdscr.getstr(31, 86).decode("utf-8").strip()  # strip removes spaces
+
+                # clear the prompt afterwards
+                stdscr.addstr(30, 0, " " * 150)
+                stdscr.addstr(31, 0, " " * 150)
+                stdscr.addstr(32, 0, " " * 150)
+                stdscr.refresh()
+
+                # Validate name
+                if name == "":
+                    # show error message
+                    stdscr.addstr(34, 50, "Name cannot be empty. Please enter again.", curses.color_pair(3))
+                    stdscr.refresh()
+                    curses.napms(1300)
+                    stdscr.addstr(34, 0, " " * 150)  # clear error message
+                    stdscr.refresh()
+                    continue  # ask again
+                else:
+                    break  # name is valid
         else:
             name = namee
 

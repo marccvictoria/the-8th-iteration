@@ -1,11 +1,8 @@
-import time
-import os
-import platform
+import time, os, platform
 from colorama import init, Fore, Back, Style
-from core import ascii
-from core import game
+from utils import ascii, game
 
-init(autoreset=True)
+init(autoreset=True) # color will automatically reset
 
 # helper functions
 
@@ -48,11 +45,13 @@ def loading(name):
     for i in range(1, 11):
         print("   [" + "=" * i * 5 + "] " + str(i/10 * 100) + "%")
         time.sleep(0.03)
+    print("Please wait.")
     time.sleep(3)
 
 def act1(name):
     os.system("cls" if platform.system() == "Windows" else "clear")
     print("ACT 1: THE AWAKENING PROTOCOL")
+    print("Please wait.")
     time.sleep(3)
     os.system("cls" if platform.system() == "Windows" else "clear")
 
@@ -69,6 +68,12 @@ def act1(name):
         # print lines
         if line == 0:
             print(ascii.scn1)
+        if line == 1:
+            os.system("cls" if platform.system() == "Windows" else "clear")
+            print(ascii.scn2)
+        if line == 4:
+            os.system("cls" if platform.system() == "Windows" else "clear")
+            print(ascii.scn3)
         
         printLine(dialogue, line)
 
@@ -90,6 +95,7 @@ def act1(name):
 def act2(name):
     os.system("cls" if platform.system() == "Windows" else "clear")
     print("ACT 2: CHASE THE GLITCH")
+    print("Please wait.")
     time.sleep(3)
     os.system("cls" if platform.system() == "Windows" else "clear")
 
@@ -105,7 +111,7 @@ def act2(name):
                 ["t", """Trovius:
  There's a region where its surveillance weakens. A dead zone.
  A place it cannot fully predict.
-""", ["[1] And you're taking me there?" "[2] Let's get this done!"], {"1":10, "2":11}],
+""", ["[1] And you're taking me there?", "[2] Let's get this done!"], {"1":10, "2":11}],
 ["t", "Yes, don't be scared now."],
 ["t", "That's the spirit " + name + "!"],
 ["t", """Trovius: It's the only path to reach ARGUS' Root Core. 
@@ -116,6 +122,12 @@ def act2(name):
 
     line = 0
     while line < len(dialogue):
+        if line == 4:
+            os.system("cls" if platform.system() == "Windows" else "clear")
+            print(ascii.bird)
+        if line == 12:
+            os.system("cls" if platform.system() == "Windows" else "clear")
+            print(ascii.unsanc_zone)
         # print lines
         printLine(dialogue, line)
 
@@ -132,8 +144,43 @@ def act2(name):
             line += 1
             input()
 
-def start_game(name):
-    loading(name)
-    act1(name)
-    act2(name)
-    game.game(name)
+def start_game(name, load_data=None):
+    os.system("cls" if platform.system()=="Windows" else "clear")
+    if load_data is not None:
+        # Restore saved game
+        mc = load_data["MC"]
+        day = load_data["day"]
+    
+    else:
+        # Create NEW MC
+        mc = {"Name": str(name),
+          "HP": 20.0,
+          "ATK": 5,
+          "DEF": 5,
+          "SPD": 5,
+          "maxHP": 30.0,
+          "Gold": 30,
+          # inventory
+          "Potion": {"Small": 0, 
+                     "Big": 0, 
+                     "Panacea": 0}}
+        day = 1
+        # mc = {"Name": str(name),
+        #   "HP": 20.0,
+        #   "ATK": 300,
+        #   "DEF": 1000,
+        #   "SPD": 1000,
+        #   "maxHP": 100.0,
+        #   "Gold": 300,
+        #   # inventory
+        #   "Potion": {"Small": 10, 
+        #              "Big": 10, 
+        #              "Panacea": 10}}
+
+    
+    if load_data == None:
+        loading(name)
+        act1(name)
+        act2(name)
+
+    game.game(mc, day) # daily activities

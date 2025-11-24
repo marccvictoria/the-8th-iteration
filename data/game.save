@@ -1,0 +1,18 @@
+{
+    "MC": {
+        "Name": "Marc",
+        "HP": 92.0,
+        "ATK": 28,
+        "DEF": 74,
+        "SPD": 30,
+        "maxHP": 92.0,
+        "Gold": 80,
+        "Potion": {
+            "Small": 0,
+            "Big": 0,
+            "Panacea": 0
+        },
+        "defending": false
+    },
+    "day": 16
+}

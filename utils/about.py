@@ -34,7 +34,7 @@ def about():
                                                                 *@%%%*=:%@@@@@@@@@*.*%%%@*    # Copyright (c)
                                                                   *%@-@@@+###%@%###-%#%-@@#   Some ASCII ART has been modified for use.
                                               "INSPIRATIONS:     *#=@@@+:*========+.+%@%#*%     Original artworks belong to its respective artists.
-                                              The Matrix and    @#.=-%@#.####%#*#%.#@#=+.#    (see references.txt for the comprehensive list)
+                                              The Matrix and    @#.=-%@#.####%#*#%.#@#=+.#    (see ascii_references.txt for the comprehensive list)
                                           The Truman Show"       @.+#@%+.===========+###..@    
                                                               ---...#%%@+=#########:*@@%....=.=                    
                                                           %:+*#....:+#@#@@@%@%@@@@%%@:.... .=::.%                
